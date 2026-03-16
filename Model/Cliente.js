@@ -1,4 +1,4 @@
-const Endereco = require('./Model/Endereco')
+const Endereco = require('./Endereco')
 
 class Cliente
 {
