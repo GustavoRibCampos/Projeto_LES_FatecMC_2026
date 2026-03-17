@@ -5,6 +5,7 @@ class Cliente
     constructor()
     {
         this._nome = null
+        this._login = null
         this._senha = null
         this._cpf = null
         this._telefone = null
@@ -106,6 +107,11 @@ class Cliente
         this._cpf = cpf
     }
 
+    set login(login)
+    {
+        this._login = login
+    }
+
     set telefone(telefone)
     {
         const str = telefone.replace(/\D/g, '')
@@ -172,4 +178,5 @@ class Cliente
         }
     }
 }
+
 module.exports = Cliente
