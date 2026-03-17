@@ -43,19 +43,36 @@ async lerCliente(){
 
         const result = await pool.query(sql)
         return result.rows
+
     } catch(erro) {
         console.log(erro)
     }
     
 }
 
-atualizarCliente(id){
-    const sql = `UPDATE cliente
-                 SET nome = $1, login = $2, senha = $3, cpf = $4, telefone = $5, endereco = $6`
+async atualizarCliente(nome, login, senha, cpf, telefone, endereco, id){
+    try{
+        const sql = `UPDATE cliente
+                 SET nome = $1, login = $2, senha = $3, cpf = $4, telefone = $5, endereco = $6
+                 WHERE id = $7`
+        const result = await pool.query(sql, [nome, login, senha, cpf, telefone, endereco, id])
+        return result.rows[0]
+
+    } catch(erro){
+        console.log(erro)
+    }
+    
 }
 
-deletarCliente(){
+async deletarCliente(id){
+    try{
+        const sql = `DELETE FROM cliente WHERE id = $1`
+        const result = await pool.query(sql, [id])
+        return result.rowCount
 
+    } catch(erro) {
+        console.log(erro)
+    }
 }
 }
 
