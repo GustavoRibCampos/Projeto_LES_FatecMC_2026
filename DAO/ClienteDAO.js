@@ -50,6 +50,17 @@ async lerCliente(){
     
 }
 
+async lerClientePorID(id){
+    try{
+        const sql =  `SELECT * FROM cliente
+                      WHERE id = $1`
+        const result = await pool.query(sql, [id])
+        return result.rows[0]
+    } catch(erro) {
+        console.log(erro)
+    }
+}
+
 async atualizarCliente(nome, login, senha, cpf, telefone, endereco, id){
     try{
         const sql = `UPDATE cliente

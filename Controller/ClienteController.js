@@ -10,25 +10,28 @@ router.get('/clientes', async (req, res) => {
 })
 
 router.get('/clientes/:id', async (req, res) => {
-    const resultado = await req.params.id
+    const {id} = req.params
+    const resultado = await clientedao.lerClientePorID(id)
     res.json(resultado)
 })
 
-router.post('/clientes/:id', async (req,res) => {
-    const resultado = await clientedao.criarCliente()
+router.post('/clientes', async (req,res) => {
+    const{nome, login, senha, cpf, telefone, endereco} = req.body
+    const resultado = await clientedao.criarCliente(nome, login, senha, cpf, telefone, endereco)
     res.json(resultado)
 })
 
 router.put('/clientes/:id', async (req,res) => {
-    const resultado = await clientedao.atualizarCliente()
+    const {id} = req.params
+    const {nome, login, senha, cpf, telefone, endereco} = req.body
+    const resultado = await clientedao.atualizarCliente(nome, login, senha, cpf, telefone, endereco, id)
     res.json(resultado)
 })
 
 router.delete('/clientes/:id', async (req, res) => {
-    const resultado = await clientedao.deletarCliente()
+    const{id}= req.params
+    const resultado = await clientedao.deletarCliente(id)
     res.json(resultado)
 })
-
-router.post()
 
 module.exports = router
